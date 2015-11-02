@@ -10,7 +10,7 @@ angular.module('bible', [
 ])
 
 .constant('Settings', {
-  url: 'http://localhost/bible/'
+  url: 'http://bible.afrobots.co/'
 })
 
 .run(function($ionicPlatform, $ionicConfig) {
