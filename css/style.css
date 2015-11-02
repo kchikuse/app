@@ -1,0 +1,105 @@
+ion-spinner {
+  position: fixed; 
+  top: 50%;
+  left: 50%;
+}
+
+.profile-view .top-content {
+  margin-bottom: 18vh;
+}
+
+.profile-view .user-twitter a {
+	color: #FF4C4C;
+	text-decoration: none;
+}
+
+.post-text {
+	font-size: 14px;
+	font-family: "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+}
+
+.children span.title {
+  display: block;
+  padding: 5px 0 5px 0;
+}
+
+.search .description {
+	color: #CCC6C6;
+}
+
+.category-feeds .item {
+  padding-left: 24px !important;
+}
+
+.intro {
+	padding-left: 12px !important;
+}
+
+.intro p {
+   margin: 0;
+}
+
+.intro summary {
+    margin-bottom: 14px;
+}
+
+bref,
+reflink {
+	color: #FF4C4C;
+}
+
+.post-heading b {
+	color: #FF4C4C;
+}
+
+.post-content.jge strong,
+.post-content.kdc h3 {
+  display: block;
+  margin: 10px 0 10px 0;
+}
+
+.post-content.kjv .item {
+  border: none;
+}
+
+.post-content.kjv .play {
+  position: absolute;
+  left: 10px;
+  width: 40px;
+}
+
+ion-footer-bar select {
+  width: 90%;
+}
+
+ion-footer-bar .ion-ios-arrow-forward {
+  float: right;
+}
+
+.results.list {
+  padding-top: 0;
+}
+
+h5.no-results {
+  color: #FF4C4C;
+  margin: 35px 0 20px 20px;
+}
+
+img.category-image {
+  float: left;
+  margin: 0 12px 1px 0;
+  border-radius: 5px;
+  box-shadow: 0px 7px 15px #ccc;
+}
+
+ion-footer-bar.post-footer {
+  background-color: rgba(255,255,255,0.3);
+}
+
+ion-footer-bar.post-footer .button-icon {
+  color: #FF4C4C;
+}
+
+ion-footer-bar.post-footer .pull-right {
+  text-align: right;
+}

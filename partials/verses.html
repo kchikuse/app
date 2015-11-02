@@ -1,0 +1,55 @@
+<ion-view class="children category-feeds-view">
+  
+  <ion-nav-buttons side="right">
+    <a class="button button-icon icon ion-more" ng-click="popover.show($event)"></a>
+  </ion-nav-buttons>
+  
+  <ion-nav-title>
+    <span>{{ ::book | name }} {{ ::chapter }}</span>
+  </ion-nav-title>
+
+  <ion-spinner icon="android" ng-show="busy"></ion-spinner>
+
+  <ion-content>    
+    <div class="list category-feeds" ng-hide="busy">
+
+      <div ng-repeat="verse in ::verses" class="list card post-item" ng-if="!isBible">
+        <div class="post-content item item-text-wrap {{ ::version }}" ng-bind-html="::verse.body"></div>
+      </div>
+
+      <div class="list card post-item" ng-if="isBible">
+        <div class="post-content {{ ::version }}">
+          <div class="item item-text-wrap" ng-repeat="verse in ::verses">
+            <b>{{ ::verse.startingVerse }}</b> {{ ::verse.body }}
+          </div>
+        </div>
+      </div> 
+    
+    </div>
+  </ion-content>
+  <ion-footer-bar class="post-footer bar bar-footer" ng-if="true">
+    <div class="row">
+      <div class="col col-20 col-center">
+        <a ng-if="true" class="button button-icon icon ion-chevron-left" ui-sref="app.verses({ version: version, book: book, chapter: chapter - 1 })"></a>
+      </div>
+      <div class="col col-60"></div>
+      <div class="pull-right col col-20 col-center">
+        <a ng-if="nextBook && nextChapter" class="button button-icon icon ion-chevron-right" ui-sref="app.verses({ version: version, book: nextBook, chapter: nextChapter })"></a>
+      </div>
+    </div>
+  </ion-footer-bar>
+</ion-view>
+
+<script id="verse-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-content>
+      <div class="list">
+        <a class="item" ui-sref="app.verses({ version: version, book: book, chapter: chpt })" 
+        ng-click="popover.hide()" 
+        ng-repeat="chpt in ::chapters" 
+        ng-if="chpt !== chapter">{{ ::book | name }} {{ ::chpt }}
+        </a>
+      </div>
+    </ion-content>
+  </ion-popover-view>
+</script>

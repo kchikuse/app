@@ -1,0 +1,27 @@
+<ion-view class="feeds-categories-view">
+  
+  <ion-nav-title>
+    <span>{{ ::name }}</span>
+  </ion-nav-title>
+
+  <ion-spinner icon="android" ng-show="busy"></ion-spinner>
+
+  <ion-content>
+  	<span ng-hide="busy">
+	    <div class="post-content item item-text-wrap">
+	    	<img class="category-image" ng-src="img/{{ ::slug }}.jpg">
+		    <pre class="post-text" ng-bind-html="::info"></pre>
+	    </div>
+	    <div class="post-heading item item-text-wrap">
+		    <div class="row responsive-sm" ng-if="!stats.is_ebd">
+			  <div class="col"><b>{{ ::stats.books | number }}</b> books</div>
+			  <div class="col"><b>{{ ::stats.chapters | number }}</b> chapters</div>
+			  <div class="col"><b>{{ ::stats.verses | number }}</b> verses</div>
+			</div>
+			<div class="row responsive-sm" ng-if="stats.is_ebd">
+			  <div class="col"><b>{{ ::stats.words | number }}</b> words</div>
+			</div>
+	    </div>
+    </span>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,32 @@
+<ion-view class="feeds-categories-view">
+  
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  
+  <ion-nav-title>
+    <span>&nbsp;</span>
+  </ion-nav-title>
+
+  <ion-spinner icon="android" ng-show="busy"></ion-spinner>
+
+  <ion-content>  
+    <div class="row categories-list" ng-hide="busy">    
+      <div class="col col-50" ng-repeat="version in ::versions">
+        <a class="feed-category" ng-click="open(version.slug)">
+          <img class="category-image" ng-src="img/{{ ::version.slug }}.jpg">
+          <div class="category-bg"></div>
+          <span class="category-title">{{ ::version.name }}</span>
+        </a>
+      </div>
+      <div class="col col-50">
+        <a class="feed-category" ui-sref="app.about">
+          <img class="category-image" src="img/about.jpg">
+          <div class="category-bg"></div>
+          <span class="category-title">About</span>
+        </a>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>
