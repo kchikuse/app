@@ -1,7 +1,6 @@
 <ion-view class="children category-feeds-view">
 
-  <ion-nav-buttons side="right">
-    <a class="button button-icon icon ion-ios-search" ui-sref="app.search({ version: version })"></a>
+  <ion-nav-buttons side="secondary">
     <a class="button button-icon icon ion-ios-information-outline" ui-sref="app.info({ version: version })"></a>
   </ion-nav-buttons>
 
@@ -9,10 +8,10 @@
     <span>{{ ::title }}</span>
   </ion-nav-title>
 
-  <ion-spinner icon="android" ng-show="busy"></ion-spinner>
+  <ion-spinner icon="android" ng-if="busy"></ion-spinner>
 
   <ion-content>    
-    <div class="list category-feeds" ng-hide="busy">
+    <ion-list class="list category-feeds" ng-if="!busy">
       <a ng-repeat="book in ::books track by book.book" class="item item-icon-right" ui-sref="app.chapters({ book: book.book, version: version })">
         <span class="title">{{ ::book.name }}</span>
         <p class="description">
@@ -20,6 +19,6 @@
         </p>
         <i class="icon ion-ios-arrow-forward"></i>
       </a>
-    </div>
+    </ion-list>
   </ion-content>
 </ion-view>

@@ -1,0 +1,43 @@
+<ion-view class="search profile-view">
+
+  <ion-nav-title>
+    <span>Search</span>
+  </ion-nav-title>
+
+  <ion-spinner icon="android" ng-show="busy"></ion-spinner>
+
+  <ion-content>
+    <div class="list list-inset">
+      <form>
+        <label class="item item-input">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="text" placeholder="Search" ng-model="search.query">
+        </label>
+        <label class="item item-input item-select">
+          <div class="input-label">&nbsp;</div>
+          <select ng-model="search.version" ng-options="v.slug as v.name for v in versions"></select>
+        </label>
+        <button class="button button-full button-positive" ng-click="doSearch()" ng-disabled="!search.query || busy">Search</button>
+      </form>
+    </div>
+
+    <h5 class="no-results" ng-if="!results.length && query">No results for "{{ query }}"</h5> 
+    
+    <ion-list class="results list category-feeds" ng-hide="busy">
+      <ion-item ng-repeat="res in results">
+        
+        <div class="item-text-wrap" ng-if="isDict">
+          <h4> {{ res.word }}</h4>
+          <div ng-bind-html="res.body"></div>
+        </div>
+
+        <div class="item-text-wrap {{ version }}" ng-if="!isDict">
+          <h4> {{ res.book | name }} {{ res.chapter }}:{{ res.startingVerse }}</h4>
+          <div ng-bind-html="res.body"></div>
+        </div>
+      
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
+</ion-view>

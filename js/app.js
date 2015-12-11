@@ -1,54 +1,46 @@
 angular.module('templates', []); 
+angular.module('bible.controllers', []);
 
 angular.module('bible', [
   'ionic',
   'templates',
   'bible.filters',
   'bible.services',
-  'bible.directives',
   'bible.controllers'  
 ])
 
-.constant('Settings', {
-  url: 'http://bible.afrobots.co/'
+.constant('Const', {
+  api: 'http://localhost/bible/',
+  audio: 'http://localhost:8080'
 })
 
-.run(function($ionicPlatform, $ionicConfig) {
+.run(function( $ionicPlatform, $ionicConfig, Const, Cache ) {
 
-  $ionicPlatform.ready(function() {
-    
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
-
-    if(window.cordova) {
-      window.open = window.cordova.InAppBrowser.open;
-    }
-
-    $ionicConfig.views.transition('android');
-    $ionicConfig.views.swipeBackEnabled(false);
+  $ionicPlatform.ready(function() {  
+    $ionicConfig.views.transition( 'android' );
+    $ionicConfig.views.swipeBackEnabled( false );
   });
 
 })
 
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+.config(function( $stateProvider, $urlRouterProvider, $ionicConfigProvider ) {
   
   $stateProvider
 
   .state('app', {
     url: "/app",
     abstract: true,
-    controller: 'AppCtrl',
-    templateUrl: 'partials/side-menu.html'
+    controller: 'IntroCtrl',
+    templateUrl: 'components/shared/side-menu.html'
   })
 
   .state('app.intro', {
     url: '/intro',
     views: {
       'menuContent': {
-        controller: 'AppCtrl',
-        templateUrl: 'partials/intro.html'
+        controller: 'IntroCtrl',
+        templateUrl: 'components/intro/intro.html'
       }
     }
   })
@@ -58,7 +50,7 @@ angular.module('bible', [
     views: {
       'menuContent': {
         controller: 'LetterCtrl',
-        templateUrl: 'partials/letters.html'
+        templateUrl: 'components/letters/letters.html'
       }
     }
   })
@@ -68,7 +60,7 @@ angular.module('bible', [
     views: {
       'menuContent': {
         controller: 'WordsCtrl',
-        templateUrl: 'partials/words.html'
+        templateUrl: 'components/words/words.html'
       }
     }
   })
@@ -78,7 +70,7 @@ angular.module('bible', [
     views: {
       'menuContent': {
         controller: 'BooksCtrl',
-        templateUrl: 'partials/books.html'
+        templateUrl: 'components/books/books.html'
       }
     }
   })
@@ -88,7 +80,7 @@ angular.module('bible', [
     views: {
       'menuContent': {
         controller: 'ChaptersCtrl',
-        templateUrl: 'partials/chapters.html'
+        templateUrl: 'components/chapters/chapters.html'
       }
     }
   })
@@ -98,7 +90,7 @@ angular.module('bible', [
     views: {
       'menuContent': {
         controller: 'VersesCtrl',
-        templateUrl: 'partials/verses.html'
+        templateUrl: 'components/verses/verses.html'
       }
     }
   })
@@ -108,7 +100,7 @@ angular.module('bible', [
     views: {
       'menuContent': {
         controller: 'InfoCtrl',
-        templateUrl: 'partials/info.html'
+        templateUrl: 'components/info/info.html'
       }
     }
   })
@@ -118,7 +110,7 @@ angular.module('bible', [
     views: {
       'menuContent': {
         controller: 'SearchCtrl',
-        templateUrl: 'partials/search.html'
+        templateUrl: 'components/search/search.html'
       }
     }
   })
@@ -127,13 +119,13 @@ angular.module('bible', [
     url: '/about',
     views: {
       'menuContent': {
-        templateUrl: 'partials/about.html'
+        templateUrl: 'components/shared/about.html'
       }
     }
   });
 
-  $urlRouterProvider.otherwise('app/intro');
-  $ionicConfigProvider.backButton.previousTitleText(false).text('');
-  $ionicConfigProvider.scrolling.jsScrolling( !ionic.Platform.isAndroid() );
+  $urlRouterProvider.otherwise( 'app/intro' );
+  $ionicConfigProvider.scrolling.jsScrolling( true );
+  $ionicConfigProvider.backButton.previousTitleText( false ).text('');
 
 });

@@ -8,10 +8,10 @@
     <span>&nbsp;</span>
   </ion-nav-title>
 
-  <ion-spinner icon="android" ng-show="busy"></ion-spinner>
+  <ion-spinner icon="android" ng-if="busy"></ion-spinner>
 
   <ion-content>  
-    <div class="row categories-list" ng-hide="busy">    
+    <div class="row categories-list" ng-if="!busy">    
       <div class="col col-50" ng-repeat="version in ::versions">
         <a class="feed-category" ng-click="open(version.slug)">
           <img class="category-image" ng-src="img/{{ ::version.slug }}.jpg">
@@ -20,13 +20,12 @@
         </a>
       </div>
       <div class="col col-50">
-        <a class="feed-category" ui-sref="app.about">
+        <a class="feed-category" ui-sref="app.search({ version: 'kjv' })">
           <img class="category-image" src="img/about.jpg">
           <div class="category-bg"></div>
-          <span class="category-title">About</span>
+          <span class="category-title">Search</span>
         </a>
       </div>
-
     </div>
   </ion-content>
 </ion-view>

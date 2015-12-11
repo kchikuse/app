@@ -1,7 +1,46 @@
+@media screen and (min-width: 768px) {
+  button[menu-toggle] {
+    display: none;
+  }
+  .feeds-categories-view .feed-category {
+    height: calc(50vw - 130px);
+  }
+  .popover {
+   height: 800px;
+  }
+  .profile-view .user-image-container .user-image {
+    width: 60%;
+  }
+}
+
+.contrast-on .item,
+.contrast-on .item b {
+  color: #cccccc;
+  background-color: #23262A;
+}
+
+mark {
+  background-color: #fff;
+  color: #D17C00;
+}
+
 ion-spinner {
+  z-index: 1000;
   position: fixed; 
   top: 50%;
   left: 50%;
+}
+
+ion-spinner[icon=lines] {
+  top: 5%;  
+}
+
+.hilite {
+  color: #F5262E !important;
+}
+
+.popover {
+  height: 480px;
 }
 
 .profile-view .top-content {
@@ -27,6 +66,10 @@ ion-spinner {
 	color: #CCC6C6;
 }
 
+.search .item-select {
+  margin-top: 8px;
+}
+
 .category-feeds .item {
   padding-left: 24px !important;
 }
@@ -36,7 +79,7 @@ ion-spinner {
 }
 
 .intro p {
-   margin: 0;
+  margin: 10px 0;
 }
 
 .intro summary {
@@ -60,6 +103,7 @@ reflink {
 
 .post-content.kjv .item {
   border: none;
+  padding-bottom: 0;
 }
 
 .post-content.kjv .play {

@@ -1,7 +1,7 @@
 <ion-view class="children category-feeds-view">
 
-  <ion-nav-buttons side="right">
-    <a class="button button-icon icon ion-more" ng-click="popover.show($event)"></a>
+  <ion-nav-buttons side="secondary">
+    <a class="button button-icon icon ion-ios-book-outline" ng-click="popover.show($event)"></a>
   </ion-nav-buttons>
 
   <ion-nav-title>
@@ -10,33 +10,33 @@
 
   <ion-spinner icon="android" ng-show="busy"></ion-spinner>
 
-  <ion-content>    
+  <ion-content>
     <div class="list category-feeds" ng-hide="busy">      
+      
       <div class="intro item item-body" ng-if="::introduction">
         <details>
           <summary>Summary</summary>
           <p ng-bind-html="introduction"></p>
         </details>
-      </div>     
-      
-      <a ng-repeat="chapter in ::chapters" class="item item-icon-right" ui-sref="app.verses({ version: version, book: book, chapter: chapter })">
+      </div>
+
+      <div ng-repeat="chapter in ::chapters" class="item item-icon-right" ui-sref="app.verses({ version: version, book: book, chapter: chapter })">
         <span class="title">{{ ::chapter }}</span>
         <i class="icon ion-ios-arrow-forward"></i>
-      </a>
+      </div>
     
     </div>
   </ion-content>
 </ion-view>
 
-<script id="book-popover.html" type="text/ng-template">
+<script id="popover.html" type="text/ng-template">
   <ion-popover-view>
     <ion-content>
       <div class="list">
         <a class="item" ui-sref="app.chapters({ version: version, book: bk.book })" 
         ng-click="popover.hide()" 
-        ng-repeat="bk in books"
-        ng-if="bk.book !== book">{{ ::bk.name }}
-        </a>
+        ng-repeat="bk in books" 
+        ng-class="{ 'hilite' : bk.book == book }">{{ ::bk.name }}</a>
       </div>
     </ion-content>
   </ion-popover-view>
