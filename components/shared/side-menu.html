@@ -25,11 +25,7 @@
         <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.search({ version: 'kjv' })">
           <i class="icon ion-search"></i>
           <h2 class="menu-text">Search</h2>
-        </ion-item>   
-        <!--ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.settings">
-          <i class="icon ion-settings"></i>
-          <h2 class="menu-text">Settings</h2>
-        </ion-item-->     
+        </ion-item>      
         <ion-item class="item-icon-left item-complex" nav-clear menu-close ng-click="show()">
           <a class="item-content">
             <i class="icon ion-settings"></i>
@@ -46,18 +42,20 @@
 </ion-side-menus>
 
 <script id="settings.html" type="text/ng-template">
-  <ion-modal-view>
-    <ion-header-bar>
-      <h1 class="title">Settings</h1>
-    </ion-header-bar>
-    <ion-content>
-      <div class="list list-inset">
-        <ion-toggle ng-model="settings.chapterNumbers" toggle-class="toggle-assertive">Show chapter numbers</ion-toggle>
-        <ion-toggle ng-model="settings.enableCaching" toggle-class="toggle-assertive">Enable caching</ion-toggle>
-        <ion-toggle ng-model="settings.continuousPlay" toggle-class="toggle-assertive">Play audio continuously</ion-toggle>
-        <ion-toggle ng-model="settings.contrastMode" toggle-class="toggle-assertive">Enable contrast</ion-toggle>
-        <button class="button button-full button-positive" ng-click="save()">OK</button>
-      </div>
-    </ion-content>
-  </ion-modal-view>
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Settings</h1>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list list-inset">
+      <ion-toggle ng-model="settings.chapterNumbers" toggle-class="toggle-assertive">Show chapter numbers</ion-toggle>
+      <ion-toggle ng-model="settings.enableCaching" toggle-class="toggle-assertive">Enable caching</ion-toggle>
+      <ion-toggle ng-model="settings.continuousPlay" toggle-class="toggle-assertive">Play audio continuously</ion-toggle>
+      <ion-toggle ng-model="settings.autoNavigate" toggle-class="toggle-assertive">Auto navigate with audio</ion-toggle>
+      <ion-toggle ng-model="settings.contrastMode" toggle-class="toggle-assertive">Enable contrast</ion-toggle>
+      <button class="button button-full button-positive" ng-click="save()">Save</button>
+      <button class="button button-full button-assertive" ng-click="clear()">Clear cache</button>
+    </div>
+  </ion-content>
+</ion-modal-view>
 </script>

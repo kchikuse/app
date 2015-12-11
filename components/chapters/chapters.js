@@ -9,7 +9,8 @@ angular.module('bible.controllers')
 	Bible.chapters(version, book).then(function(data) {
 		$scope.busy = false;
 		angular.extend($scope, data[0]);	
-		$scope.chapters = _.range(1, data[0].chapters + 1);			
+		$scope.chapters = _.range(1, data[0].chapters + 1);	
+		if(!$scope.$$phase) { $scope.$apply(); }
 	});
 
 	Bible.books(version).then(function(data) {

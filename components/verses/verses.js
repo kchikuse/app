@@ -1,15 +1,25 @@
 angular.module('bible.controllers')
 
-.controller('VersesCtrl', function($scope, $stateParams, $ionicPopover, $rootScope, Player, Bible, Settings) {
+.controller('VersesCtrl', function($scope, $state, $stateParams, $ionicPopover, Player, Bible, Settings) {
 	$scope.busy = true;
 	$scope.load = false;
 	var book = $stateParams.book;
 	var chapter = $stateParams.chapter;
 	var version = $stateParams.version;	
+	$scope.isBible = version === 'kjv';
 
 	var onended = function() {
-		if(!!Settings.get('continuousPlay')) {
-			$scope.play($scope.nextBook, $scope.nextChapter);
+		var nextBook = $scope.nextBook;
+		var nextChapter = $scope.nextChapter;
+		var autoNavigate = !!Settings.get('autoNavigate');
+		var continuePlay = !!Settings.get('continuousPlay');
+
+		if(autoNavigate) {
+			$scope.next();
+		}
+
+		if(continuePlay) {
+			$scope.play(nextBook, nextChapter);
 		}
 		else {
 			$scope.stop();
@@ -17,13 +27,17 @@ angular.module('bible.controllers')
 		}
 	};
 
-	var oncontrast = function() {
-		$scope.contrast = !!Settings.get('contrastMode') ? 'contrast-on' : '';
+	var navigate = function(book, chapter) {
+		$state.go('app.verses', { 
+			version: version, 
+			book: book, 
+			chapter: chapter 
+		});
 	};
 
-	$scope.play = function(pbook, pchapter) {
+	$scope.play = function(book, chapter) {
 		$scope.load = true;
-		Player.play(pbook, pchapter, function() {
+		Player.play(book, chapter, function() {
 			$scope.load = false;
 			$scope.$digest();
 		}, onended);
@@ -37,18 +51,17 @@ angular.module('bible.controllers')
 		return Player.isPlay(); 
 	};
 
-	$scope.showChapters = function() {
-		return Settings.get('chapterNumbers'); 
-	};	
+	$scope.next = function() {
+		navigate($scope.nextBook, $scope.nextChapter);
+	};
 
-	oncontrast();
-
-	$rootScope.$on('settings-change', oncontrast);
+	$scope.prev = function() {
+		navigate($scope.prevBook, $scope.prevChapter);
+	};
 
 	Bible.verses(version, book, chapter).then(function(data) {
 		$scope.busy = false;
-		angular.extend($scope, data);
-		$scope.isBible = version === 'kjv';
+		angular.extend($scope, data);		
 		$scope.$apply();
 	});
 

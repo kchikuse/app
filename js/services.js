@@ -150,7 +150,8 @@ angular.module('bible.services', [])
     chapterNumbers: true,
     enableCaching: true,
     continuousPlay: true,
-    contrastMode: false
+    contrastMode: false,
+    autoNavigate: false
   };
 
   return {
@@ -201,6 +202,16 @@ angular.module('bible.services', [])
     remove: function(key) {
       db.get(key).then(function (doc) {
         return db.remove(doc);
+      });
+    },
+
+    clear: function() {
+      return db.allDocs().then(function (result) {
+        return Promise.all(result.rows.map(function (row) {
+          return db.remove(row.id, row.value.rev);
+        }));
+      }).catch(function (err) {
+
       });
     }
   };

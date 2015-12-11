@@ -31,7 +31,7 @@ angular.module('bible', [
   .state('app', {
     url: "/app",
     abstract: true,
-    controller: 'IntroCtrl',
+    controller: 'SharedCtrl',
     templateUrl: 'components/shared/side-menu.html'
   })
 
@@ -39,8 +39,8 @@ angular.module('bible', [
     url: '/intro',
     views: {
       'menuContent': {
-        controller: 'IntroCtrl',
-        templateUrl: 'components/intro/intro.html'
+        controller: 'SharedCtrl',
+        templateUrl: 'components/shared/intro.html'
       }
     }
   })

@@ -6,5 +6,6 @@ angular.module('bible.controllers')
 	Bible.letters().then(function(data) {
 		$scope.busy = false;	
 		angular.extend($scope, data);	
+		if(!$scope.$$phase) { $scope.$apply(); }
 	});
 });

@@ -1,6 +1,6 @@
 angular.module('bible.controllers')
 
-.controller('IntroCtrl', function($scope, $state, $ionicModal, $rootScope, Settings, Bible) {
+.controller('SharedCtrl', function($scope, $state, $ionicModal, $ionicPopup, Cache, Settings, Bible) {
 	
 	$scope.busy = true;	
 	$scope.settings = Settings.load(); 
@@ -23,8 +23,22 @@ angular.module('bible.controllers')
 
 	$scope.save = function() {
 		Settings.save($scope.settings);
-		$rootScope.$emit('settings-change');
+
+		$scope.showChapters = !!Settings.get('chapterNumbers');
+		$scope.contrast = !!Settings.get('contrastMode') ? 'contrast-on' : '';	
+		
 		$scope.modal.hide();
+	};
+
+	$scope.clear = function() {
+		Cache.clear().then(function() {
+			$ionicPopup.alert({
+		     title: 'Success',
+		     template: 'The cache has been deleted'
+		   }).then(function(res) {
+		     $scope.modal.hide();
+		   });
+		});
 	};
 
 	$scope.show = function() {

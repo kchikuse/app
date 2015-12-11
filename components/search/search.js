@@ -20,7 +20,7 @@ angular.module('bible.controllers')
 			$scope.results = results;
 			$scope.isDict = ver === 'ebd';
 			$scope.query = $scope.search.query;	
-			$scope.$apply();			
+			if(!$scope.$$phase) { $scope.$apply(); }			
 		});
 	};
 });
