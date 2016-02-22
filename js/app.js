@@ -10,7 +10,7 @@ angular.module('bible', [
 ])
 
 .constant('Const', {
-  api: 'http://localhost/bible/',
+  api: 'http://bible.mylivity.co.za/',
   audio: 'http://localhost:8080'
 })
 
