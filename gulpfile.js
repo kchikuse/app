@@ -30,8 +30,8 @@ gulp.task('js', function() {
     'js/services.js',
     'components/**/*.js'
   ])
-  .pipe(replace('http://localhost/bible/', 'http://bible.afrobots.co/'))
-  .pipe(replace('http://localhost:8080', 'http://audio.shonahistory.co.za'))
+  .pipe(replace('http://localhost/bible/', 'http://bible.mylivity.co.za/'))
+  .pipe(replace('http://localhost:8080', 'http://audio.mylivity.co.za'))
   .pipe(ngAnnotate())
   .pipe(jshint())
   .pipe(jshint.reporter(stylish))
