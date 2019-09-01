@@ -1,27 +1,28 @@
 <ion-view class="children category-feeds-view">
   
   <ion-nav-buttons side="secondary">
+    <a class="button button-icon icon ion-ios-search" ui-sref="app.search({ version: version })"></a>
     <a class="button button-icon icon ion-more" ng-click="popover.show($event)"></a>
   </ion-nav-buttons>
 
   <ion-nav-title>
-    <span>{{ ::title }}</span>
+    <span>{{ title }}</span>
   </ion-nav-title>
 
   <ion-spinner icon="android" ng-show="busy"></ion-spinner>
 
   <ion-content>    
     <div class="list category-feeds" ng-hide="busy">
-      <div ng-repeat="word in ::words" class="list card post-item">
+      <div ng-repeat="word in words" class="list card post-item">
         <div class="post-content item item-text-wrap">
-          <h3>{{ ::word.word }}</h3>
-          <div ng-bind-html="::word.description"></div>          
+          <h3>{{ word.word }}</h3>
+          <div ng-bind-html="word.description"></div>          
         </div>
       </div>    
     </div>
   </ion-content>
-
-  <ion-footer-bar class="post-footer bar bar-footer" ng-if="pages > 1">
+  
+  <ion-footer-bar class="post-footer bar bar-footer" ng-if="pages > page">
     <div class="row">
       <div class="col col-20 col-center">
         <a ng-if="page > 1" class="button button-icon icon ion-chevron-left" ui-sref="app.words({ letter: letter, page: page - 1 })"></a>
@@ -41,8 +42,8 @@
       <div class="list">
         <a class="item" ui-sref="app.words({ letter: ltr, page: 1 })" 
         ng-click="popover.hide()" 
-        ng-repeat="ltr in alphabet" 
-        ng-class="{ 'hilite' : ltr == letter }">{{ ::ltr }}
+        ng-repeat="ltr in alphabet"
+        ng-class="letter == ltr ? 'current' : ''">{{ ltr }}
         </a>
       </div>
     </ion-content>

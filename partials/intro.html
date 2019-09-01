@@ -12,18 +12,11 @@
 
   <ion-content>  
     <div class="row categories-list" ng-if="!busy">    
-      <div class="col col-50" ng-repeat="version in ::versions">
+      <div class="col col-50" ng-repeat="version in versions">
         <a class="feed-category" ng-click="open(version.slug)">
-          <img class="category-image" ng-src="img/{{ ::version.slug }}.jpg">
+          <img class="category-image" ng-src="img/{{ version.slug }}.jpg">
           <div class="category-bg"></div>
-          <span class="category-title">{{ ::version.name }}</span>
-        </a>
-      </div>
-      <div class="col col-50">
-        <a class="feed-category" ui-sref="app.search({ version: 'kjv' })">
-          <img class="category-image" src="img/about.jpg">
-          <div class="category-bg"></div>
-          <span class="category-title">Search</span>
+          <span class="category-title">{{ version.name }}</span>
         </a>
       </div>
     </div>

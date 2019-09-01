@@ -1,70 +1,58 @@
-@media screen and (min-width: 768px) {
-  button[menu-toggle] {
-    display: none;
-  }
-  .feeds-categories-view .feed-category {
-    height: calc(50vw - 130px);
-  }
-  .popover {
-   height: 800px;
-  }
-  .profile-view .user-image-container .user-image {
-    width: 60%;
-  }
-}
-
-.title.item h1 {
-  font-size: 21px;
-  color: #6A6A6A;
-}
-
-.contrast-on .list.category-feeds,
-.contrast-on .list.category-feeds b,
-.contrast-on .list.category-feeds .item {
-  color: #cccccc;
-  background-color: #23262A;
-}
-.contrast-on .list.category-feeds .list.card {
-  box-shadow: none;
-}
-.contrast-on ion-footer-bar.post-footer {
-  background-color: rgba(255,255,255,0.04);
-}
-.contrast-on ion-footer-bar.post-footer .button-icon {
-  color: #cccccc;
-}
-
 mark {
   background-color: #fff;
   color: #D17C00;
 }
 
 ion-spinner {
-  z-index: 1000;
   position: fixed; 
   top: 50%;
   left: 50%;
 }
 
-ion-spinner[icon=lines] {
-  top: 5%;  
+.list .current {
+  color: #FF4C4C;
 }
 
-.hilite {
-  color: #F5262E !important;
+.item-text-wrap .anchors {
+  text-decoration: none;
+  color: #387EF5;
 }
 
-.popover {
-  height: 480px;
+.item-text-wrap .anchors:hover {
+  color: #FF4C4C;
+}
+
+.post-content .anchor,
+.post-content .anchor b {
+  color: #FF4C4C;
 }
 
 .profile-view .top-content {
   margin-bottom: 18vh;
 }
 
+.profile-view .user-name {
+  font-size: 17px;
+}
+
+.profile-view .user-title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
 .profile-view .user-twitter a {
 	color: #FF4C4C;
 	text-decoration: none;
+}
+
+.profile-view .user-image-container {
+    width: 33vw;
+}
+
+.profile-view .profile-container {
+    display: grid;
+    grid-template-columns: 100vw;
+    place-items: center;
 }
 
 .post-text {
@@ -81,31 +69,20 @@ ion-spinner[icon=lines] {
 	color: #CCC6C6;
 }
 
-.search .item-select {
-  margin-top: 8px;
-}
-
 .category-feeds .item {
   padding-left: 24px !important;
 }
 
-.title summary .icon {
-  color: #FF4C4C;
-  font-size: 2.5em;
-  float: left;
-  margin-right: 13px;
+.intro {
+	padding-left: 12px !important;
 }
-.title details[open] summary .ion-arrow-shrink {
-  display: block;
+
+.intro p {
+   margin: 16px 0;
 }
-.title details[open] summary span,
-.title details[open] summary .ion-arrow-expand,
-.title summary::-webkit-details-marker,
-.title details summary .ion-arrow-shrink {
-  display: none;
-}
-.title p {
-  margin: 10px 0;
+
+.intro summary {
+    margin-bottom: 14px;
 }
 
 bref,
@@ -125,7 +102,6 @@ reflink {
 
 .post-content.kjv .item {
   border: none;
-  padding-bottom: 0;
 }
 
 .post-content.kjv .play {
@@ -151,12 +127,11 @@ h5.no-results {
   margin: 35px 0 20px 20px;
 }
 
-.info img.category-image {
+img.category-image {
   float: left;
   margin: 0 12px 1px 0;
-  -webkit-filter: sepia(1);
-  -webkit-filter: sepia(100%);
-  filter: sepia(100%);
+  border-radius: 5px;
+  box-shadow: 0px 7px 15px #ccc;
 }
 
 ion-footer-bar.post-footer {
@@ -169,4 +144,13 @@ ion-footer-bar.post-footer .button-icon {
 
 ion-footer-bar.post-footer .pull-right {
   text-align: right;
+}
+
+/* height: calc(50vw - 75px);   ipad */
+
+@media (min-width: 1000px) {
+  .feeds-categories-view .feed-category {
+    height: -webkit-calc(50vw - 155px);
+    height: calc(50vw - 155px);
+  }
 }

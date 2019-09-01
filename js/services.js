@@ -1,38 +1,38 @@
 angular.module('bible.services', [])
 
-.service('Bible', function(http) {
+.service('Bible', function(api) {
   return {
     
     versions: function() {
-      return http.Get('versions');
+      return api.Get('versions');
     },
 
-    books: function( version ) {
-      return http.Get('books', version);
+    books: function(version) {
+      return api.Get('books', version);
     },
 
-    chapters: function( version, book ) {
-      return http.Get('chapters', version, book);
+    chapters: function(version, book) {
+      return api.Get('chapters', version, book);
     },
 
-    verses: function( version, book, chapter ) {
-      return http.Get('verses', version, book, chapter);
+    verses: function(version, book, chapter) {
+      return api.Get('verses', version, book, chapter);
     },
 
     letters: function() {
-      return http.Get('letters');
+      return api.Get('words');
     },
 
-    words: function( letter, page ) {
-      return http.Get('words', letter, page);
+    words: function(letter, page) {
+      return api.Get('words', letter, page);
     },
 
-    info: function( version ) {
-      return http.Get('about', version);
+    info: function(version) {
+      return api.Get('about', version);
     },
 
-    search: function( version, query ) {
-      return http.Get('search', version, query);
+    search: function(version, query) {
+      return api.Get('search', version, query);
     },
 
     alphabet: function() {
@@ -107,136 +107,22 @@ angular.module('bible.services', [])
       '3 John',
       'Jude',
       'Revelation'];
-    }    
-  };
-})
-
-.service('Player', function(Bible, Const) {
-  
-  var isPlaying = false;
-  var audio = new Audio();
-
-  return {
-    play: function(book, chapter, oncanplay, onended) {
-      isPlaying = true;
-      audio.src = this.createFileName(book, chapter);
-      audio.oncanplay = oncanplay;
-      audio.onended  = onended;
-      audio.play();      
-    },
-
-    stop: function() {
-      audio.pause();
-      isPlaying = false;
-    },
-
-    isPlay: function() {
-      return isPlaying;
-    },
-
-    createFileName: function(book, chapter) {
-      var name = Bible.bookList()[ book - 1 ];
-      var pbook = book < 10 ? '0' + book : book;
-      var tail = name + '%20' + chapter + '.mp3';
-      return [ Const.audio, pbook + '%20-%20' + name, tail ].join('/');
-    }    
-  };
-})
-
-.service('Settings', function() {
-  var key = 'bible.settings';
-
-  var defaults = {
-    chapterNumbers: true,
-    enableCaching: true,
-    continuousPlay: true,
-    contrastMode: false,
-    autoNavigate: false
-  };
-
-  return {
-    get: function(item) {
-      return this.load()[ item ];
-    },
-    load: function() {
-      return JSON.parse( localStorage.getItem(key) ) || defaults;
-    },
-    save: function(settings) {
-      localStorage.setItem(key, JSON.stringify(settings));
     }
+    
   };
 })
 
-.service('Cache', function() {  
-  var db = new PouchDB('bible', { adapter: 'websql' });
-
-  if (!db.adapter) { 
-    db = new PouchDB('bible');
-  }
-
-  return {
-    add: function(key, value) {
-      return db.put({ '_id': key, 'data': value });
-    },
-
-    update: function(key, value) {
-      var add = this.add;
-      return db.get(key).then(function (doc) {
-        doc.data = value;
-        return db.put(doc);
-      })
-      .catch(function (err) {
-        return add(key, value);
-      });
-    },
-
-    get: function(key) {
-      return db.get(key, function(err, response) {
-        return err ? err : response.data;
-      })
-      .catch(function (err) {
-        return err;
-      });
-    },
-
-    remove: function(key) {
-      db.get(key).then(function (doc) {
-        return db.remove(doc);
-      });
-    },
-
-    clear: function() {
-      return db.allDocs().then(function (result) {
-        return Promise.all(result.rows.map(function (row) {
-          return db.remove(row.id, row.value.rev);
-        }));
-      }).catch(function (err) {
-
-      });
-    }
-  };
-})
-
-.service('http', function($http, Cache, Const, Settings) {
-  
-  var fetch = function(uri, cacheable) {
-    return $http.get(Const.api + uri).then(function(response) {
-        if(cacheable) { Cache.add(uri, response.data); }
-        return response.data;
-    });
-  };
-
+.service('api', function($http, Settings) {
   return {
     Get: function() {
       var key = _.toArray(arguments).join('/');
-      var cacheEnabled = !!Settings.get('enableCaching');
-      var cacheable = ['search', 'verses'].indexOf(arguments[0]) < 0;
 
-      if(!cacheEnabled) { return fetch(key, false); }
-      
-      return Cache.get(key).then(function(c) {
-        return c.data || fetch(key, cacheable);
+      return $http.get(Settings.url + key).then(function(response) {
+        return response.data;
       });
-    }
+    },   
   };
-});
+})
+
+
+;

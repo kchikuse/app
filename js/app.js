@@ -1,5 +1,4 @@
 angular.module('templates', []); 
-angular.module('bible.controllers', []);
 
 angular.module('bible', [
   'ionic',
@@ -9,38 +8,36 @@ angular.module('bible', [
   'bible.controllers'  
 ])
 
-.constant('Const', {
-  api: 'https://bible.chikuse.co.za/',
-  audio: 'http://localhost:8080'
+.constant('Settings', {
+  url: 'https://bible.chikuse.co.za/'
 })
 
-.run(function( $ionicPlatform, $ionicConfig, Const, Cache ) {
+.run(function($ionicPlatform) {
 
-  $ionicPlatform.ready(function() {  
-    $ionicConfig.views.transition( 'android' );
-    $ionicConfig.views.swipeBackEnabled( false );
+  $ionicPlatform.ready(function() {
+
   });
 
 })
 
 
-.config(function( $stateProvider, $urlRouterProvider, $ionicConfigProvider ) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
   
   $stateProvider
 
   .state('app', {
     url: "/app",
     abstract: true,
-    controller: 'SharedCtrl',
-    templateUrl: 'components/shared/side-menu.html'
+    controller: 'AppCtrl',
+    templateUrl: 'partials/side-menu.html'
   })
 
   .state('app.intro', {
     url: '/intro',
     views: {
       'menuContent': {
-        controller: 'SharedCtrl',
-        templateUrl: 'components/shared/intro.html'
+        controller: 'AppCtrl',
+        templateUrl: 'partials/intro.html'
       }
     }
   })
@@ -50,7 +47,7 @@ angular.module('bible', [
     views: {
       'menuContent': {
         controller: 'LetterCtrl',
-        templateUrl: 'components/letters/letters.html'
+        templateUrl: 'partials/letters.html'
       }
     }
   })
@@ -60,7 +57,7 @@ angular.module('bible', [
     views: {
       'menuContent': {
         controller: 'WordsCtrl',
-        templateUrl: 'components/words/words.html'
+        templateUrl: 'partials/words.html'
       }
     }
   })
@@ -70,7 +67,7 @@ angular.module('bible', [
     views: {
       'menuContent': {
         controller: 'BooksCtrl',
-        templateUrl: 'components/books/books.html'
+        templateUrl: 'partials/books.html'
       }
     }
   })
@@ -80,17 +77,17 @@ angular.module('bible', [
     views: {
       'menuContent': {
         controller: 'ChaptersCtrl',
-        templateUrl: 'components/chapters/chapters.html'
+        templateUrl: 'partials/chapters.html'
       }
     }
   })
 
   .state('app.verses', {
-    url: '/verses/:version/:book/:chapter',
+    url: '/verses/:version/:book/:chapter/:verse',
     views: {
       'menuContent': {
         controller: 'VersesCtrl',
-        templateUrl: 'components/verses/verses.html'
+        templateUrl: 'partials/verses.html'
       }
     }
   })
@@ -100,17 +97,17 @@ angular.module('bible', [
     views: {
       'menuContent': {
         controller: 'InfoCtrl',
-        templateUrl: 'components/info/info.html'
+        templateUrl: 'partials/info.html'
       }
     }
   })
 
   .state('app.search', {
-    url: '/search/:version',
+    url: '/search/:version/:query',
     views: {
       'menuContent': {
         controller: 'SearchCtrl',
-        templateUrl: 'components/search/search.html'
+        templateUrl: 'partials/search.html'
       }
     }
   })
@@ -119,13 +116,12 @@ angular.module('bible', [
     url: '/about',
     views: {
       'menuContent': {
-        templateUrl: 'components/shared/about.html'
+        templateUrl: 'partials/about.html'
       }
     }
   });
 
-  $urlRouterProvider.otherwise( 'app/intro' );
-  $ionicConfigProvider.scrolling.jsScrolling( true );
-  $ionicConfigProvider.backButton.previousTitleText( false ).text('');
+  $urlRouterProvider.otherwise('app/intro');
+  $ionicConfigProvider.backButton.previousTitleText(false).text('');
 
 });
